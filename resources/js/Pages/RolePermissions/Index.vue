@@ -41,7 +41,7 @@ const updatePermissions = () => {
 <template>
     <Layout title="Manage Role Permissions">
         <div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h2 class="text-xl font-bold mb-4">Manage Permissions for Role: {{ role.name }}</h2>
+            <h2 class="text-xl font-bold mb-4">Permissions for {{ role.name.charAt(0).toUpperCase() + role.name.slice(1) }} Role</h2>
 
             <!-- Flash messages -->
             <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded">
@@ -53,27 +53,26 @@ const updatePermissions = () => {
 
             <!-- Permissions form -->
             <form @submit.prevent="updatePermissions">
-                <div v-for="(permissionsGroup, groupName) in groupedPermissions" :key="groupName" class="mb-6">
-                    <h3 class="text-lg font-semibold">{{ groupName.charAt(0).toUpperCase() + groupName.slice(1) }} Permissions</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                        <div
-                            v-for="permission in permissionsGroup"
-                            :key="permission.id"
-                            class="flex items-center"
-                        >
-                            <input
-                                type="checkbox"
-                                :id="permission.name"
-                                :value="permission.name"
-                                v-model="selectedPermissions"
-                                class="form-checkbox text-blue-600 focus:ring-blue-500"
-                            />
-                            <label :for="permission.name" class="ml-2 text-gray-800">
-                                {{ permission.name }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                <table class="w-full border-collapse border border-gray-300">
+                    <tbody>
+                        <template v-for="(permissionsGroup, groupName) in groupedPermissions" :key="groupName">
+                            <tr class="bg-gray-200">
+                                <td class="border border-gray-300 px-4 py-2 font-bold" colspan="2">{{ groupName.charAt(0).toUpperCase() + groupName.slice(1) }}</td>
+                            </tr>
+                            <tr v-for="permission in permissionsGroup" :key="permission.id">
+                                <td class="border-b border-gray-300 px-8 py-2">{{ permission.name.split(' ')[0].charAt(0).toUpperCase() + permission.name.split(' ')[0].slice(1) }}</td>
+                                <td class="border-b border-gray-300 px-2 py-2 w-8">
+                                    <input 
+                                        type="checkbox" 
+                                        :value="permission.name" 
+                                        v-model="selectedPermissions" 
+                                        class="form-checkbox text-blue-600 focus:ring-blue-500"
+                                    />
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
 
                 <button
                     type="submit"
