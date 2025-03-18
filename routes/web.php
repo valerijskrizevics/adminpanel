@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserRoleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,8 +31,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/my-roles', [UserRoleController::class, 'update'])->name('user.roles.update');
 });
 
-// Show roles and permissions page for a specific role by name
-Route::get('/roles/{roleName}', [PermissionController::class, 'index'])->name('roles.index');
+// Show all roles in the system
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+
+// Show permissions page for a specific role by name
+Route::get('/roles/{roleName}', [PermissionController::class, 'index'])
+    ->where('roleName', '[a-z]+')
+    ->name('roles.permissions');
 
 // Update roles' permissions
-Route::post('/roles/{roleName}/permissions', [PermissionController::class, 'updatePermissions'])->name('roles.permissions.update');
+Route::post('/roles/{roleName}/permissions', [PermissionController::class, 'updatePermissions'])
+    ->where('roleName', '[a-z]+')
+    ->name('roles.permissions.update');

@@ -52,6 +52,18 @@ const logout = () => {
                                     Dashboard
                                 </NavLink>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('user.roles.edit')" :active="route().current('user.roles.edit')">
+                                    My Roles
+                                </NavLink>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('roles.index')" :active="route().current('roles.index')">
+                                    Roles and Permissions
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">

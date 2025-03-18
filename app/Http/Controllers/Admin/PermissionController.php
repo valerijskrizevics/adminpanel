@@ -13,7 +13,7 @@ class PermissionController extends Controller
     public function index($roleName)
     {
         // Find the role by its name
-        $role = Role::where('name', $roleName)->firstOrFail();
+        $role = Role::whereRaw('LOWER(name) = ?', [$roleName])->firstOrFail();
 
         // Retrieve all available permissions
         $permissions = Permission::all();
@@ -32,7 +32,7 @@ class PermissionController extends Controller
             }
         }
 
-        return inertia('Roles/Index', [
+        return inertia('RolePermissions/Index', [
             'role' => $role,
             'groupedPermissions' => $groupedPermissions,
             'permissions' => $role->permissions->pluck('name')->toArray(),
@@ -43,7 +43,7 @@ class PermissionController extends Controller
     public function updatePermissions(Request $request, $roleName)
     {
         // Find the role by its name
-        $role = Role::where('name', $roleName)->firstOrFail();
+        $role = Role::whereRaw('LOWER(name) = ?', [$roleName])->firstOrFail();
 
         // Validate the incoming request (ensure it's an array of permissions, but it's optional)
         $request->validate([
@@ -61,6 +61,6 @@ class PermissionController extends Controller
         }
 
         // Return a success message
-        return redirect()->route('roles.index', ['roleName' => $role->name])->with('success', 'Permissions updated successfully!');
+        return redirect()->route('roles.permissions', ['roleName' => $role->name])->with('success', 'Permissions updated successfully!');
     }
 }
