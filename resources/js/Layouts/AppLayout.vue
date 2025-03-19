@@ -54,6 +54,12 @@ const logout = () => {
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('blog.index')" :active="route().current('blog.index')">
+                                    Blog
+                                </NavLink>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('user.roles.edit')" :active="route().current('user.roles.edit')">
                                     My Roles
                                 </NavLink>
@@ -61,7 +67,7 @@ const logout = () => {
 
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('roles.index')" :active="route().current('roles.index')">
-                                    Roles and Permissions
+                                    Permissions
                                 </NavLink>
                             </div>
                         </div>

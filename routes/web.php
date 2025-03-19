@@ -3,9 +3,11 @@
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserRoleController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -43,3 +45,5 @@ Route::get('/roles/{roleName}', [PermissionController::class, 'index'])
 Route::post('/roles/{roleName}/permissions', [PermissionController::class, 'updatePermissions'])
     ->where('roleName', '[a-z]+')
     ->name('roles.permissions.update');
+
+Route::resource('blog', BlogController::class);
