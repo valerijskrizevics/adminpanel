@@ -15,6 +15,16 @@ class BlogPostRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'text' => $this->text ?? '', // Convert null to empty string
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      */
     public function rules(): array
@@ -22,7 +32,7 @@ class BlogPostRequest extends FormRequest
         return [
             'title' => 'required|max:100',
             'short_description' => 'required|max:255',
-            'text' => 'nullable',
+            'text' => 'nullable|string',
             'user_id' => 'required|exists:users,id',
         ];
     }

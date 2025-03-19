@@ -14,6 +14,7 @@ class BlogController extends Controller
         $blogPosts = BlogPost::with('user')->get(); // Include user relationship
         return Inertia::render('Blog/Index', [
             'blogPosts' => $blogPosts,
+            'users' => User::all('id', 'name'),
         ]);
     }
 

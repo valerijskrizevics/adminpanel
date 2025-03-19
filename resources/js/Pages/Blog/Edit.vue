@@ -2,7 +2,12 @@
 import { useForm } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
-const { blogPost, users } = defineProps();
+const props = defineProps({
+  blogPost: Object,
+  users: Array, // Receive users prop
+});
+
+const { blogPost, users } = props;
 
 const form = useForm({
   title: blogPost.title,

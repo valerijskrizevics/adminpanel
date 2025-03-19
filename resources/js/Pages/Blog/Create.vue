@@ -4,7 +4,11 @@ import { ref, defineProps } from "vue";
 import Layout from "@/Layouts/AppLayout.vue";
 import Modal from "@/Components/Modal.vue"; // Import your custom modal
 
-const { users } = defineProps();
+const props = defineProps({
+  users: Array, // Receive users prop
+});
+
+const { users } = props;
 
 const form = useForm({
   title: "",
@@ -80,6 +84,7 @@ function submit() {
               <div v-if="form.errors.text" class="text-red-500 text-sm mt-1">{{ form.errors.text }}</div>
             </div>
 
+            <!-- User Dropdown -->
             <div class="mb-4">
               <label for="user_id" class="block">User</label>
               <select
@@ -89,19 +94,22 @@ function submit() {
                 :class="{ 'border-red-500': form.errors.user_id }"
               >
                 <option value="">Select User</option>
-                <option v-for="user in users" :value="user.id" :key="user.id">
+                <option v-for="user in props.users" :key="user.id" :value="user.id">
                   {{ user.name }}
                 </option>
               </select>
               <div v-if="form.errors.user_id" class="text-red-500 text-sm mt-1">{{ form.errors.user_id }}</div>
             </div>
 
-            <div class="flex justify-between">
-              <button type="button" @click="showModal = false" class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500">
+            <div class="flex justify-between mt-4">
+              <!-- Cancel Button on the left -->
+              <button @click="showCreateModal = false" type="button" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
                 Cancel
               </button>
+
+              <!-- Save Button on the right -->
               <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                Create Blog Post
+                Create Post
               </button>
             </div>
           </form>
