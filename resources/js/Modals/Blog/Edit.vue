@@ -4,22 +4,23 @@ import Modal from '@/Components/Modal.vue';
 
 const props = defineProps({
   show: Boolean,
+  blogPost: Object,
   users: Array,
 });
 
 const emit = defineEmits(['close', 'success']);
 
 const form = useForm({
-  title: '',
-  short_description: '',
-  text: '',
-  user_id: '',
+  title: props.blogPost.title,
+  short_description: props.blogPost.short_description,
+  text: props.blogPost.text ?? '',
+  user_id: props.blogPost.user_id,
 });
 
 function submit() {
-  form.post('/blog', {
+  form.put(`/blog/${props.blogPost.id}`, {
     onSuccess: () => {
-      emit('success'); // Refresh list after creation
+      emit('success'); // Refresh list after update
       emit('close'); // Close modal
     },
   });
@@ -30,7 +31,7 @@ function submit() {
   <Modal :show="show" @close="emit('close')">
     <template #default>
       <div class="p-6">
-        <h2 class="text-xl font-semibold mb-4">Create Blog Post</h2>
+        <h2 class="text-xl font-semibold mb-4">Edit Blog Post</h2>
         <form @submit.prevent="submit">
           <div class="mb-4">
             <label for="title" class="block">Title</label>
@@ -62,7 +63,7 @@ function submit() {
               Cancel
             </button>
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              Create Post
+              Save Changes
             </button>
           </div>
         </form>
