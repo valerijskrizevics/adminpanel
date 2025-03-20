@@ -4,7 +4,6 @@ import Modal from '@/Components/Modal.vue';
 
 const props = defineProps({
   show: Boolean,
-  users: Array,
 });
 
 const emit = defineEmits(['close', 'success']);

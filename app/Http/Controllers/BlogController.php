@@ -37,8 +37,10 @@ class BlogController extends Controller
 
     public function show(BlogPost $blogPost)
     {
+        $blogPost->with('user');
+
         return Inertia::render('Blog/Show', [
-            'blogPost' => $blogPost,
+            'blogPost' => $blogPost->only('title', 'short_description', 'text', 'created_at', 'user'),
         ]);
     }
 

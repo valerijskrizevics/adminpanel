@@ -46,7 +46,9 @@ Route::post('/roles/{roleName}/permissions', [PermissionController::class, 'upda
     ->where('roleName', '[a-z]+')
     ->name('roles.permissions.update');
 
-Route::resource('blog', BlogController::class)->except('update', 'destroy');
+Route::resource('blog', BlogController::class)->except('show', 'update', 'destroy');
+
+Route::get('/blog/{blogPost}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::put('/blog/{blogPost}', [BlogController::class, 'update'])->name('blog.update');
 
