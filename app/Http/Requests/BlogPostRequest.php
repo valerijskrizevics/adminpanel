@@ -33,7 +33,6 @@ class BlogPostRequest extends FormRequest
             'title' => 'required|max:100',
             'short_description' => 'required|max:255',
             'text' => 'nullable|string',
-            'user_id' => 'required|exists:users,id',
         ];
     }
 

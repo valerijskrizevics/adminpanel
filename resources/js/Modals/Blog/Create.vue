@@ -34,27 +34,39 @@ function submit() {
         <form @submit.prevent="submit">
           <div class="mb-4">
             <label for="title" class="block">Title</label>
-            <input v-model="form.title" id="title" type="text" class="w-full border p-2" />
+            <input
+              v-model="form.title"
+              id="title"
+              type="text"
+              class="w-full border p-2"
+              :class="{ 'border-red-500': form.errors.title }"
+            />
+            <div v-if="form.errors.title" class="text-red-500 text-sm mt-1">{{ form.errors.title }}</div>
           </div>
 
           <div class="mb-4">
             <label for="short_description" class="block">Short Description</label>
-            <input v-model="form.short_description" id="short_description" type="text" class="w-full border p-2" />
+            <input
+              v-model="form.short_description"
+              id="short_description"
+              type="text"
+              class="w-full border p-2"
+              :class="{ 'border-red-500': form.errors.short_description }"
+            />
+            <div v-if="form.errors.short_description" class="text-red-500 text-sm mt-1">
+              {{ form.errors.short_description }}
+            </div>
           </div>
 
           <div class="mb-4">
             <label for="text" class="block">Text</label>
-            <textarea v-model="form.text" id="text" class="w-full border p-2"></textarea>
-          </div>
-
-          <div class="mb-4">
-            <label for="user_id" class="block">User</label>
-            <select v-model="form.user_id" id="user_id" class="w-full border p-2">
-              <option value="">Select User</option>
-              <option v-for="user in users" :value="user.id" :key="user.id">
-                {{ user.name }}
-              </option>
-            </select>
+            <textarea
+              v-model="form.text"
+              id="text"
+              class="w-full border p-2"
+              :class="{ 'border-red-500': form.errors.text }"
+            ></textarea>
+            <div v-if="form.errors.text" class="text-red-500 text-sm mt-1">{{ form.errors.text }}</div>
           </div>
 
           <div class="flex justify-between mt-4">
