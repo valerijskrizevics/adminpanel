@@ -15,6 +15,7 @@ class BlogController extends Controller
         return Inertia::render('Blog/Index', [
             'blogPosts' => $blogPosts,
             'users' => User::all('id', 'name'),
+            'canManage' => auth()->user()->can('manage blog'),
         ]);
     }
 

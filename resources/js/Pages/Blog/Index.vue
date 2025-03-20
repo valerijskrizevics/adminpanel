@@ -9,6 +9,7 @@ import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 const props = defineProps({
   blogPosts: Array,
   users: Array,
+  canManage: Boolean,
   flash: Object,
 });
 
@@ -47,7 +48,7 @@ const deletePost = () => {
       </div>
 
       <div class="mb-4">
-        <button @click="showCreateModal = true" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <button v-if="canManage" @click="showCreateModal = true" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
           Create Blog Post
         </button>
       </div>
@@ -58,7 +59,7 @@ const deletePost = () => {
             <th class="text-left px-4 py-2">Title</th>
             <th class="text-left px-4 py-2">Short Description</th>
             <th class="text-left px-4 py-2">User</th>
-            <th class="text-left px-4 py-2">Actions</th>
+            <th v-if="canManage" class="text-left px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -70,7 +71,7 @@ const deletePost = () => {
             </td>
             <td class="text-left align-top px-4 py-2">{{ blogPost.short_description }}</td>
             <td class="text-left align-top px-4 py-2 whitespace-nowrap">{{ blogPost.user.name }}</td>
-            <td class="text-left align-top px-4 py-2 whitespace-nowrap">
+            <td v-if="canManage" class="text-left align-top px-4 py-2 whitespace-nowrap">
               <button @click="openEditModal(blogPost)" class="text-blue-600">Edit</button>
               |
               <button @click.prevent="confirmDelete(blogPost)" class="text-red-600">X</button>
