@@ -4,6 +4,7 @@ import { Link, router } from '@inertiajs/vue3';
 import Layout from '@/Layouts/AppLayout.vue';
 import Create from '@/Modals/Blog/Create.vue';
 import Edit from '@/Modals/Blog/Edit.vue';
+import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 
 const props = defineProps({
   blogPosts: Array,
@@ -13,19 +14,27 @@ const props = defineProps({
 
 const showCreateModal = ref(false);
 const showEditModal = ref(false);
+const showConfirmModal = ref(false);
 const selectedBlogPost = ref(null);
+const blogPostToDelete = ref(null);
 
 const openEditModal = async (blogPost) => {
   selectedBlogPost.value = blogPost;
-  await nextTick(); // Ensures Vue processes the change before opening the modal
+  await nextTick();
   showEditModal.value = true;
 };
 
-const deletePost = (id) => {
-  if (confirm("Are you sure you want to delete this post?")) {
-    router.delete(route('blog.destroy', id))
+const confirmDelete = (blogPost) => {
+  blogPostToDelete.value = blogPost;
+  showConfirmModal.value = true;
+};
+
+const deletePost = () => {
+  if (blogPostToDelete.value) {
+    router.delete(route('blog.destroy', blogPostToDelete.value.id));
+    showConfirmModal.value = false;
   }
-}
+};
 </script>
 
 <template>
@@ -64,7 +73,7 @@ const deletePost = (id) => {
             <td class="text-left align-top px-4 py-2 whitespace-nowrap">
               <button @click="openEditModal(blogPost)" class="text-blue-600">Edit</button>
               |
-              <button @click.prevent="deletePost(blogPost.id)" class="text-red-600">X</button>
+              <button @click.prevent="confirmDelete(blogPost)" class="text-red-600">X</button>
             </td>
           </tr>
         </tbody>
@@ -73,5 +82,20 @@ const deletePost = (id) => {
 
     <Create :show="showCreateModal" :users="users" @close="showCreateModal = false" />
     <Edit v-if="selectedBlogPost" :show="showEditModal" :blogPost="selectedBlogPost" :users="users" @close="showEditModal = false" />
+
+    <ConfirmationModal :show="showConfirmModal" @close="showConfirmModal = false">
+      <template #title>
+        Delete Blog Post
+      </template>
+
+      <template #content>
+        Are you sure you want to delete this post?
+      </template>
+
+      <template #footer>
+        <button @click="showConfirmModal = false" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+        <button @click="deletePost" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 ml-3">Delete</button>
+      </template>
+    </ConfirmationModal>
   </Layout>
 </template>
