@@ -46,10 +46,10 @@ const deletePost = (id) => {
       <table class="min-w-full bg-white border border-gray-300">
         <thead>
           <tr>
-            <th class="px-4 py-2">Title</th>
-            <th class="px-4 py-2">Short Description</th>
-            <th class="px-4 py-2">User</th>
-            <th class="px-4 py-2">Actions</th>
+            <th class="text-left px-4 py-2">Title</th>
+            <th class="text-left px-4 py-2">Short Description</th>
+            <th class="text-left px-4 py-2">User</th>
+            <th class="text-left px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
