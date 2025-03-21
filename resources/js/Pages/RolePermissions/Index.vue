@@ -42,20 +42,20 @@ const updatePermissions = () => {
   <Layout title="Manage Permissions">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
-        <h1 class="text-2xl font-semibold mb-4 ml-6">
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">
           Permissions for Role: {{ role.name.charAt(0).toUpperCase() + role.name.slice(1) }}
         </h1> 
         
         <!-- Flash messages -->
-        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 ml-6 rounded">
+        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 sm-ml-6 rounded">
           {{ flash.success }}
         </div>
-        <div v-if="flash?.error" class="bg-red-500 text-white p-4 mb-4 ml-6 rounded">
+        <div v-if="flash?.error" class="bg-red-500 text-white p-4 mb-4 sm-ml-6 rounded">
           {{ flash.error }}
         </div>
 
         <!-- Permissions form -->
-        <form @submit.prevent="updatePermissions" class="ml-6">
+        <form @submit.prevent="updatePermissions" class="sm-ml-6">
           <table class="w-full border-collapse border border-gray-300">
             <tbody>
               <template v-for="(permissionsGroup, groupName) in groupedPermissions" :key="groupName">

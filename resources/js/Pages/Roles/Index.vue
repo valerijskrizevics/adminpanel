@@ -13,8 +13,8 @@ const props = defineProps({
     <Layout title="Manage Roles">
       <div class="bg-white min-h-screen">
         <div class="max-w-3xl mx-auto p-6 bg-white">
-          <h1 class="text-2xl font-semibold mb-4 ml-6">Roles List</h1>
-          <table class="min-w-full bg-white border border-gray-300 ml-6">
+          <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Roles List</h1>
+          <table class="min-w-full bg-white border border-gray-300 sm-ml-6">
             <thead>
               <tr class="bg-gray-200">
                 <th class="border px-4 py-2 text-left">Role name</th>

@@ -32,24 +32,24 @@ const updateRoles = () => {
   <Layout title="My Roles">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
-        <h1 class="text-2xl font-semibold mb-4 ml-6">My Roles</h1>
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">My Roles</h1>
 
         <!-- Flash message for success -->
-        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 ml-6 rounded">
+        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 sm-ml-6 rounded">
           {{ flash.success }}
         </div>
 
         <!-- Flash message for error -->
-        <div v-if="flash?.error" class="bg-red-500 text-white p-4 mb-4 ml-6 rounded">
+        <div v-if="flash?.error" class="bg-red-500 text-white p-4 mb-4 sm-ml-6 rounded">
           {{ flash.error }}
         </div>
 
         <!-- Display validation errors passed via props -->
-        <div v-if="errors.roles" class="bg-red-500 text-white p-4 mb-4 ml-6 rounded">
+        <div v-if="errors.roles" class="bg-red-500 text-white p-4 mb-4 sm-ml-6 rounded">
           {{ errors.roles }}
         </div>
 
-        <form @submit.prevent="updateRoles" class="ml-6">
+        <form @submit.prevent="updateRoles" class="sm-ml-6">
           <div v-for="role in roles" :key="role.id" class="flex items-center gap-2 mb-2">
             <input
               type="checkbox"
