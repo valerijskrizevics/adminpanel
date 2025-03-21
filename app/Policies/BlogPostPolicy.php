@@ -21,7 +21,7 @@ class BlogPostPolicy
      */
     public function view(User $user, BlogPost $blogPost): bool
     {
-        return $user->can('view blog');
+        return $user->can('view blog'); // Unused - checked by spatie middleware
     }
 
     /**
@@ -29,7 +29,7 @@ class BlogPostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('manage blog');
+        return $user->can('manage blog'); // Unused - checked by spatie middleware
     }
 
     /**

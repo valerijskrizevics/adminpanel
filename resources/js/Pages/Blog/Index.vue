@@ -42,45 +42,47 @@ const deletePost = () => {
 
 <template>
   <Layout title="Manage Blog Posts">
-    <div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 class="text-2xl font-semibold">Blog Posts</h1>
+    <div class="bg-white min-h-screen">
+      <div class="max-w-3xl mx-auto p-6 bg-white rounded-lg">
+        <h1 class="text-2xl font-semibold">Blog Posts</h1>
 
-      <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded">
-        {{ flash.success }}
+        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded">
+          {{ flash.success }}
+        </div>
+
+        <div class="mb-4">
+          <button v-if="canManage" @click="showCreateModal = true" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            New
+          </button>
+        </div>
+
+        <table class="min-w-full bg-white border border-gray-300">
+          <thead>
+            <tr>
+              <th class="text-left px-4 py-2">Title</th>
+              <th class="text-left px-4 py-2">Short Description</th>
+              <th class="text-left px-4 py-2">User</th>
+              <th v-if="canManage" class="text-left px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="blogPost in blogPosts" :key="blogPost.id">
+              <td class="text-left align-top px-4 py-2">
+                <Link :href="`/blog/${blogPost.id}`" class="text-blue-600">
+                  {{ blogPost.title }}
+                </Link>
+              </td>
+              <td class="text-left align-top px-4 py-2">{{ blogPost.short_description }}</td>
+              <td class="text-left align-top px-4 py-2 whitespace-nowrap">{{ blogPost.user.name }}</td>
+              <td v-if="canManage && (canManageAny || blogPost.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
+                <button @click="openEditModal(blogPost)" class="text-blue-600">Edit</button>
+                |
+                <button @click.prevent="confirmDelete(blogPost)" class="text-red-600">X</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div class="mb-4">
-        <button v-if="canManage" @click="showCreateModal = true" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Create Blog Post
-        </button>
-      </div>
-
-      <table class="min-w-full bg-white border border-gray-300">
-        <thead>
-          <tr>
-            <th class="text-left px-4 py-2">Title</th>
-            <th class="text-left px-4 py-2">Short Description</th>
-            <th class="text-left px-4 py-2">User</th>
-            <th v-if="canManage" class="text-left px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="blogPost in blogPosts" :key="blogPost.id">
-            <td class="text-left align-top px-4 py-2">
-              <Link :href="`/blog/${blogPost.id}`" class="text-blue-600">
-                {{ blogPost.title }}
-              </Link>
-            </td>
-            <td class="text-left align-top px-4 py-2">{{ blogPost.short_description }}</td>
-            <td class="text-left align-top px-4 py-2 whitespace-nowrap">{{ blogPost.user.name }}</td>
-            <td v-if="canManage && (canManageAny || blogPost.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
-              <button @click="openEditModal(blogPost)" class="text-blue-600">Edit</button>
-              |
-              <button @click.prevent="confirmDelete(blogPost)" class="text-red-600">X</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
     <Create :show="showCreateModal" :users="users" @close="showCreateModal = false" />

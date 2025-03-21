@@ -50,6 +50,14 @@ class BlogController extends Controller
 
     public function edit(BlogPost $blogPost)
     {
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+        if ($currentUser->cannot('update', $blogPost)) {
+            abort(403);
+        }
+
         $users = User::all();
         return Inertia::render('Blog/Edit', [
             'blogPost' => $blogPost,
@@ -59,6 +67,14 @@ class BlogController extends Controller
 
     public function update(BlogPostRequest $request, BlogPost $blogPost)
     {
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+        if ($currentUser->cannot('update', $blogPost)) {
+            abort(403);
+        }
+
         $blogPost->update($request->validated());
 
         return redirect()->route('blog.index')->with('success', 'Blog post updated');
@@ -66,6 +82,14 @@ class BlogController extends Controller
 
     public function destroy(BlogPost $blogPost)
     {
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+        if ($currentUser->cannot('delete', $blogPost)) {
+            abort(403);
+        }
+
         $blogPost->delete();
 
         return redirect()->route('blog.index')->with('success', 'Blog post deleted');

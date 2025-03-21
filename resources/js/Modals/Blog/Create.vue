@@ -12,12 +12,15 @@ const form = useForm({
   title: '',
   short_description: '',
   text: '',
-  user_id: '',
 });
 
 function submit() {
   form.post('/blog', {
     onSuccess: () => {
+      form.title = '';
+      form.short_description = '';
+      form.text = '';
+
       emit('success'); // Refresh list after creation
       emit('close'); // Close modal
     },

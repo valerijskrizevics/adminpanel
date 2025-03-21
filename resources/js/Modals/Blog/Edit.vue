@@ -13,7 +13,6 @@ const form = useForm({
   title: props.blogPost.title,
   short_description: props.blogPost.short_description,
   text: props.blogPost.text ?? '',
-  user_id: props.blogPost.user_id,
 });
 
 function submit() {
