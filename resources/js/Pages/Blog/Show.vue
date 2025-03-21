@@ -25,7 +25,7 @@ const props = defineProps({
 
       <div class="flex justify-end mt-4">
         <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-          Back to Blog Posts
+          Back
         </Link>
       </div>
     </div>

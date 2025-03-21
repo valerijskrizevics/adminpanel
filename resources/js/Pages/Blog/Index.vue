@@ -2,8 +2,8 @@
 import { ref, nextTick } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 import Layout from '@/Layouts/AppLayout.vue';
-import Create from '@/Modals/Blog/Create.vue';
-import Edit from '@/Modals/Blog/Edit.vue';
+import Create from '@/Pages/Blog/Create.vue';
+import Edit from '@/Pages/Blog/Edit.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 
 const props = defineProps({
@@ -50,12 +50,9 @@ const deletePost = () => {
         </div>
 
         <div class="mb-4 ml-6">
-          <button 
-            v-if="canManage" 
-            @click="showCreateModal = true" 
-            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          <Link v-if="canManage" :href="route('blog.create')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             New
-          </button>
+          </Link>
         </div>
 
         <table class="min-w-full bg-white border border-gray-300 ml-6">
@@ -77,7 +74,7 @@ const deletePost = () => {
               <td class="text-left align-top px-4 py-2">{{ blogPost.short_description }}</td>
               <td class="text-left align-top px-4 py-2 whitespace-nowrap">{{ blogPost.user.name }}</td>
               <td v-if="canManage && (canManageAny || blogPost.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
-                <button @click="openEditModal(blogPost)" class="text-blue-600">Edit</button>
+                <Link :href="route('blog.edit', blogPost.id)" class="text-blue-600">Edit</Link>
                 |
                 <button @click.prevent="confirmDelete(blogPost)" class="text-red-600">X</button>
               </td>

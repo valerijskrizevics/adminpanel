@@ -58,13 +58,7 @@ class BlogController extends Controller
             abort(403);
         }
 
-        if (request()->wantsJson() || request()->header('X-Inertia')) {
-            return response()->json([
-                'blogPost' => $blogPost
-            ]);
-        }
-
-        return Inertia::render('Blog/Index', [
+        return Inertia::render('Blog/Edit', [
             'blogPost' => $blogPost,
         ]);
     }
