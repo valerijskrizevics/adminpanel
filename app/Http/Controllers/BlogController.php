@@ -11,20 +11,23 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogPosts = BlogPost::with('user')->get(); // Include user relationship
+        $blogPosts = BlogPost::with('user')->get();
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
         return Inertia::render('Blog/Index', [
             'blogPosts' => $blogPosts,
             'users' => User::all('id', 'name'),
-            'canManage' => auth()->user()->can('manage blog'),
+            'canManage' => $currentUser->can('manage blog'),
+            'canManageAny' => $currentUser->hasRole('admin'),
+            'currentUser' => $currentUser->only('id'),
         ]);
     }
 
     public function create()
     {
-        $users = User::all(); // Get all users for the user dropdown
-        return Inertia::render('Blog/Create', [
-            'users' => $users,
-        ]);
+        return Inertia::render('Blog/Create');
     }
 
     public function store(BlogPostRequest $request)

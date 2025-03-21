@@ -10,6 +10,8 @@ const props = defineProps({
   blogPosts: Array,
   users: Array,
   canManage: Boolean,
+  canManageAny: Boolean,
+  currentUser: Object,
   flash: Object,
 });
 
@@ -71,7 +73,7 @@ const deletePost = () => {
             </td>
             <td class="text-left align-top px-4 py-2">{{ blogPost.short_description }}</td>
             <td class="text-left align-top px-4 py-2 whitespace-nowrap">{{ blogPost.user.name }}</td>
-            <td v-if="canManage" class="text-left align-top px-4 py-2 whitespace-nowrap">
+            <td v-if="canManage && (canManageAny || blogPost.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
               <button @click="openEditModal(blogPost)" class="text-blue-600">Edit</button>
               |
               <button @click.prevent="confirmDelete(blogPost)" class="text-red-600">X</button>
