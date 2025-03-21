@@ -53,6 +53,6 @@ class UserRoleController extends Controller
         // Sync multiple roles for the user
         $user->syncRoles($request->roles);
 
-        return redirect()->route('user.roles.edit')->with('success', 'Your roles have been updated.');
+        return redirect()->route('roles.index')->with('success', 'Your roles have been updated.');
     }
 }

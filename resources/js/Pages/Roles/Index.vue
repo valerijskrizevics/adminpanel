@@ -14,6 +14,13 @@ const props = defineProps({
       <div class="bg-white min-h-screen">
         <div class="max-w-3xl mx-auto p-6 bg-white">
           <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Roles List</h1>
+          
+          <div class="mb-4 sm-ml-6">
+            <Link :href="route('user.roles.edit')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              My Roles
+            </Link>
+          </div>
+          
           <table class="min-w-full bg-white border border-gray-300 sm-ml-6">
             <thead>
               <tr class="bg-gray-200">
@@ -34,6 +41,7 @@ const props = defineProps({
               </tr>
             </tbody>
           </table>
+
         </div>
       </div>
     </Layout>
