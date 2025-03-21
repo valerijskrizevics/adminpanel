@@ -43,20 +43,23 @@ const deletePost = () => {
 <template>
   <Layout title="Manage Blog Posts">
     <div class="bg-white min-h-screen">
-      <div class="max-w-3xl mx-auto p-6 bg-white rounded-lg">
-        <h1 class="text-2xl font-semibold">Blog Posts</h1>
+      <div class="max-w-3xl mx-auto p-6 bg-white">
+        <h1 class="text-2xl font-semibold mb-4 ml-6">Blog Posts</h1>
 
-        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded">
+        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded ml-6">
           {{ flash.success }}
         </div>
 
-        <div class="mb-4">
-          <button v-if="canManage" @click="showCreateModal = true" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <div class="mb-4 ml-6">
+          <button 
+            v-if="canManage" 
+            @click="showCreateModal = true" 
+            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             New
           </button>
         </div>
 
-        <table class="min-w-full bg-white border border-gray-300">
+        <table class="min-w-full bg-white border border-gray-300 ml-6">
           <thead>
             <tr>
               <th class="text-left px-4 py-2">Title</th>
