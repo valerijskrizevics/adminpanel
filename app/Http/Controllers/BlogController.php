@@ -58,10 +58,14 @@ class BlogController extends Controller
             abort(403);
         }
 
-        $users = User::all();
-        return Inertia::render('Blog/Edit', [
+        if (request()->wantsJson() || request()->header('X-Inertia')) {
+            return response()->json([
+                'blogPost' => $blogPost
+            ]);
+        }
+
+        return Inertia::render('Blog/Index', [
             'blogPost' => $blogPost,
-            'users' => $users,
         ]);
     }
 
@@ -86,7 +90,7 @@ class BlogController extends Controller
          * @var User $currentUser
          */
         $currentUser = auth()->user();
-        if ($currentUser->cannot('delete', $blogPost)) {
+        if ($currentUser->cannot('', $blogPost)) {
             abort(403);
         }
 

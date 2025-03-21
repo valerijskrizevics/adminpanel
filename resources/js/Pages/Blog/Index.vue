@@ -8,7 +8,6 @@ import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 
 const props = defineProps({
   blogPosts: Array,
-  users: Array,
   canManage: Boolean,
   canManageAny: Boolean,
   currentUser: Object,
@@ -88,8 +87,8 @@ const deletePost = () => {
       </div>
     </div>
 
-    <Create :show="showCreateModal" :users="users" @close="showCreateModal = false" />
-    <Edit v-if="selectedBlogPost" :show="showEditModal" :blogPost="selectedBlogPost" :users="users" @close="showEditModal = false" />
+    <Create :show="showCreateModal" @close="showCreateModal = false" />
+    <Edit v-if="selectedBlogPost" :show="showEditModal" :blogPostId="selectedBlogPost.id" @close="showEditModal = false" />
 
     <ConfirmationModal :show="showConfirmModal" @close="showConfirmModal = false">
       <template #title>
