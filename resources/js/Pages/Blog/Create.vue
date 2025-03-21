@@ -21,8 +21,8 @@ function submit() {
   <Layout title="New Blog Post">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
-        <h1 class="text-2xl font-semibold mb-4 ml-6">New Blog Post</h1>
-        <form @submit.prevent="submit">
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">New Blog Post</h1>
+        <form @submit.prevent="submit" class="sm-ml-6">
           <div class="mb-4">
             <label for="title" class="block font-medium">Title</label>
             <input

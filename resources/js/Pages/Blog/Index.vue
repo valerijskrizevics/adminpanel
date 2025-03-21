@@ -2,8 +2,6 @@
 import { ref, nextTick } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 import Layout from '@/Layouts/AppLayout.vue';
-import Create from '@/Pages/Blog/Create.vue';
-import Edit from '@/Pages/Blog/Edit.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 
 const props = defineProps({
@@ -14,8 +12,6 @@ const props = defineProps({
   flash: Object,
 });
 
-const showCreateModal = ref(false);
-const showEditModal = ref(false);
 const showConfirmModal = ref(false);
 const selectedBlogPost = ref(null);
 const blogPostToDelete = ref(null);
@@ -43,19 +39,19 @@ const deletePost = () => {
   <Layout title="Manage Blog Posts">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
-        <h1 class="text-2xl font-semibold mb-4 ml-6">Blog Posts</h1>
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Blog Posts</h1>
 
-        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded ml-6">
+        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded am-ml-6">
           {{ flash.success }}
         </div>
 
-        <div class="mb-4 ml-6">
+        <div class="mb-4 sm-ml-6">
           <Link v-if="canManage" :href="route('blog.create')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             New
           </Link>
         </div>
 
-        <table class="min-w-full bg-white border border-gray-300 ml-6">
+        <table class="min-w-full bg-white border border-gray-300 sm-ml-6">
           <thead>
             <tr>
               <th class="text-left px-4 py-2">Title</th>
@@ -83,9 +79,6 @@ const deletePost = () => {
         </table>
       </div>
     </div>
-
-    <Create :show="showCreateModal" @close="showCreateModal = false" />
-    <Edit v-if="selectedBlogPost" :show="showEditModal" :blogPostId="selectedBlogPost.id" @close="showEditModal = false" />
 
     <ConfirmationModal :show="showConfirmModal" @close="showConfirmModal = false">
       <template #title>
