@@ -12,14 +12,13 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogPosts = BlogPost::with('user')->get();
+        $blogPosts = BlogPost::with('user:id')->get();
         /**
          * @var User $currentUser
          */
         $currentUser = auth()->user();
         return Inertia::render('Blog/Index', [
             'blogPosts' => $blogPosts,
-            'users' => User::all('id', 'name'),
             'canManage' => $currentUser->can('manage blog'),
             'canManageAny' => $currentUser->hasRole('admin'),
             'currentUser' => $currentUser->only('id'),
@@ -42,7 +41,7 @@ class BlogController extends Controller
 
     public function show(BlogPost $blogPost)
     {
-        $blogPost->with('user');
+        $blogPost->with('user:id,name');
 
         return Inertia::render('Blog/Show', [
             'blogPost' => $blogPost->only('title', 'short_description', 'text', 'created_at', 'user'),
