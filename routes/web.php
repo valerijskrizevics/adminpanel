@@ -19,7 +19,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/blog', [BlogController::class, 'index']);
+// Show all roles in the system
+Route::get('/admin/roles', [RoleController::class, 'index'])->name('roles.index');
 
 Route::middleware([
     'auth:sanctum',
@@ -27,7 +28,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return redirect()->route('blog.index');
+        return redirect()->route('roles.index');
     })->name('dashboard');
 });
 
@@ -35,9 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/my-roles', [UserRoleController::class, 'edit'])->name('user.roles.edit');
     Route::post('/admin/my-roles', [UserRoleController::class, 'update'])->name('user.roles.update');
 });
-
-// Show all roles in the system
-Route::get('/admin/roles', [RoleController::class, 'index'])->name('roles.index');
 
 // Show permissions page for a specific role by name
 Route::get('/admin/roles/{roleName}', [PermissionController::class, 'index'])
@@ -48,6 +46,8 @@ Route::get('/admin/roles/{roleName}', [PermissionController::class, 'index'])
 Route::post('/admin/roles/{roleName}/permissions', [PermissionController::class, 'updatePermissions'])
     ->where('roleName', '[a-z]+')
     ->name('roles.permissions.update');
+
+Route::get('/blog', [BlogController::class, 'index']);
 
 Route::middleware(['can:view blog'])->group(function() {
     Route::get('/admin/blog', [AdminBlogController::class, 'index'])->name('blog.index');
