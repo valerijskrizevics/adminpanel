@@ -1,7 +1,7 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3';
-import Breadcrumb from '@/Components/Breadcrumbs.vue';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -33,11 +33,13 @@ const updateRoles = () => {
   <Layout title="My Roles">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
-        <!-- Breadcrumb component -->
-        <Breadcrumb :items="[
-          { label: 'Roles List', link: route('roles.index') },
+        
+        <!-- Breadcrumbs component -->
+        <Breadcrumbs :items="[
+          { label: 'Permissions', link: route('roles.index') },
           { label: 'My Roles', link: route('user.roles.edit') }
         ]" />
+
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">My Roles</h1>
 
         <!-- Flash message for success -->
