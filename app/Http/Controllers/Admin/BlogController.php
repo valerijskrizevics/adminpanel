@@ -33,7 +33,7 @@ class BlogController extends Controller
     public function store(BlogPostRequest $request)
     {
         $data = $request->validated();
-        $data['user_id'] = auth()->id(); 
+        $data['user_id'] = auth()->id();
         BlogPost::create($data);
         
         return redirect()->route('blog.index')->with('success', 'Blog post created');

@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserRoleController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,13 +19,15 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/blog', [BlogController::class, 'index']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
+        return redirect()->route('blog.index');
     })->name('dashboard');
 });
 
@@ -47,17 +50,17 @@ Route::post('/admin/roles/{roleName}/permissions', [PermissionController::class,
     ->name('roles.permissions.update');
 
 Route::middleware(['can:view blog'])->group(function() {
-    Route::get('/admin/blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('/admin/blog', [AdminBlogController::class, 'index'])->name('blog.index');
 });
 
 Route::middleware(['can:manage blog'])->group(function() {
-    Route::get('/admin/blog/create', [BlogController::class, 'create'])->name('blog.create');
-    Route::post('/admin/blog/', [BlogController::class, 'store'])->name('blog.store');
-    Route::get('/admin/blog/{blogPost}/edit', [BlogController::class, 'edit'])->name('blog.edit');
-    Route::put('/admin/blog/{blogPost}', [BlogController::class, 'update'])->name('blog.update');
-    Route::delete('/admin/blog/{blogPost}', [BlogController::class, 'destroy'])->name('blog.destroy');
+    Route::get('/admin/blog/create', [AdminBlogController::class, 'create'])->name('blog.create');
+    Route::post('/admin/blog/', [AdminBlogController::class, 'store'])->name('blog.store');
+    Route::get('/admin/blog/{blogPost}/edit', [AdminBlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/admin/blog/{blogPost}', [AdminBlogController::class, 'update'])->name('blog.update');
+    Route::delete('/admin/blog/{blogPost}', [AdminBlogController::class, 'destroy'])->name('blog.destroy');
 });
 
 Route::middleware(['can:view blog'])->group(function() {
-    Route::get('/admin/blog/{blogPost}', [BlogController::class, 'show'])->name('blog.show');
+    Route::get('/admin/blog/{blogPost}', [AdminBlogController::class, 'show'])->name('blog.show');
 });

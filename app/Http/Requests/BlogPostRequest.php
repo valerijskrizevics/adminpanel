@@ -42,6 +42,10 @@ class BlogPostRequest extends FormRequest
                 $this->xssDetectedFields[$field] = true;
             }
         }
+
+        $this->merge([
+            'text' => $this->sanitizedData['text'] ?? '',
+        ]);
     }
 
     /**
