@@ -12,7 +12,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogPosts = BlogPost::with('user:id')->get();
+        $blogPosts = BlogPost::with('user:id,name')->get();
         /**
          * @var User $currentUser
          */

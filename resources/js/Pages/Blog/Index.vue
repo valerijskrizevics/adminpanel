@@ -13,6 +13,8 @@ const props = defineProps({
   flash: Object,
 });
 
+console.log(props.blogPosts);
+
 const showConfirmModal = ref(false);
 const selectedBlogPost = ref(null);
 const blogPostToDelete = ref(null);
