@@ -29,7 +29,7 @@ const props = defineProps({
         </div>
 
         <div class="mb-4 sm-ml-6">
-          <p>{{ blogPost.text }}</p>
+          <p v-html="blogPost.text.replace(/\n+/g, '<br>')"></p>
         </div>
 
         <div class="flex justify-start mt-4 sm-ml-6">
