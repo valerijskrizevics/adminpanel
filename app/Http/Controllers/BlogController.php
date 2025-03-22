@@ -20,4 +20,13 @@ class BlogController extends Controller
             'canRegister' => true,
         ]);
     }
+
+    public function show(BlogPost $blogPost)
+    {
+        $blogPost->with('user:id,name');
+
+        return Inertia::render('Landing/BlogShow', [
+            'blogPost' => $blogPost->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
+        ]);
+    }
 }

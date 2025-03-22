@@ -47,7 +47,8 @@ Route::post('/admin/roles/{roleName}/permissions', [PermissionController::class,
     ->where('roleName', '[a-z]+')
     ->name('roles.permissions.update');
 
-Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/blog', [BlogController::class, 'index'])->name('landing.blog.index');
+Route::get('/blog/{blogPost}', [BlogController::class, 'show'])->name('landing.blog.show');
 
 Route::middleware(['can:view blog'])->group(function() {
     Route::get('/admin/blog', [AdminBlogController::class, 'index'])->name('blog.index');

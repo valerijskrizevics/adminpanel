@@ -1,0 +1,27 @@
+<script setup>
+import { defineProps } from 'vue';
+import { Link } from '@inertiajs/vue3';
+
+defineProps({ 
+  blogPost: Object 
+});
+</script>
+
+<template>
+  <div class="container mx-auto p-6 max-w-2xl">
+    <Link :href="route('landing.blog.index')" class="text-blue-600 hover:underline">Back to blogs</Link>
+    
+    <div class="bg-white rounded-lg shadow-lg p-6 mt-4">
+      <img :src="'/photos/' + (blogPost.id % 10) + '.jpg'" class="rounded-md w-full h-60 object-cover">
+      <h1 class="text-3xl font-bold mt-4">{{ blogPost.title }}</h1>
+      <p class="text-sm text-gray-500 mt-2">
+        <strong>{{ blogPost.user.name }}</strong> • {{ new Date(blogPost.created_at).toLocaleDateString('ru-RU') }}
+      </p>
+    
+      <p class="mt-4 text-gray-700 italic">{{ blogPost.short_description }}</p>
+
+      <p v-html="blogPost.text.replace(/\n+/g, '<br>')" class="mt-4 text-gray-700"></p>
+    
+    </div>
+  </div>
+</template>
