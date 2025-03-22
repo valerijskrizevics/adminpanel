@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const form = useForm({
@@ -21,7 +22,15 @@ function submit() {
   <Layout title="New Blog Post">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
+
+        <!-- Breadcrumbs component -->
+        <Breadcrumbs :items="[
+          { label: 'Blog', link: route('blog.index') },
+          { label: 'New Post', link: '#' }
+        ]" />
+
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">New Blog Post</h1>
+
         <form @submit.prevent="submit" class="sm-ml-6">
           <div class="mb-4">
             <label for="title" class="block font-medium">Title</label>

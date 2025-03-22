@@ -1,6 +1,7 @@
 <script setup>
 import { defineProps } from 'vue';
 import { Link } from '@inertiajs/vue3';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -12,7 +13,15 @@ const props = defineProps({
   <Layout title="View Blog Post">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
+
+        <!-- Breadcrumbs component -->
+        <Breadcrumbs :items="[
+          { label: 'Blog', link: route('blog.index') },
+          { label: 'View Post', link: '#' }
+        ]" />
+
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">{{ blogPost.title }}</h1>
+        
         <p class="text-gray-500 sm-ml-6">By {{ blogPost.user?.name }} on {{ blogPost.created_at.split('T')[0] }}</p>
       
         <div class="mb-4 sm-ml-6">

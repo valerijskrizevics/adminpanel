@@ -1,8 +1,9 @@
 <script setup>
 import { ref, nextTick } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
-import Layout from '@/Layouts/AppLayout.vue';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
+import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   blogPosts: Array,
@@ -39,6 +40,12 @@ const deletePost = () => {
   <Layout title="Manage Blog Posts">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
+
+        <!-- Breadcrumbs component -->
+        <Breadcrumbs :items="[
+          { label: 'Blog', link: '#' }
+        ]" />
+
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Blog Posts</h1>
 
         <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded am-ml-6">

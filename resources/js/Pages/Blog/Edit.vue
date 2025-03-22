@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 import { computed } from 'vue';
 
@@ -26,7 +27,15 @@ function submit() {
   <Layout title="Edit Blog Post">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
+
+        <!-- Breadcrumbs component -->
+        <Breadcrumbs :items="[
+          { label: 'Blog', link: route('blog.index') },
+          { label: 'Edit Post', link: '#' }
+        ]" />
+
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Edit Blog Post</h1>
+
         <form @submit.prevent="submit" class="sm-ml-6">
           <div class="mb-4">
             <label for="title" class="block font-medium">Title</label>
