@@ -44,9 +44,6 @@ class BlogPostRequest extends FormRequest
         }
     }
 
-
-
-
     /**
      * Sanitize text input to prevent XSS.
      *

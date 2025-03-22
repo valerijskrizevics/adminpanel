@@ -70,7 +70,7 @@ const deletePost = () => {
           <tbody>
             <tr v-for="blogPost in blogPosts" :key="blogPost.id">
               <td class="text-left align-top px-4 py-2">
-                <Link :href="`/blog/${blogPost.id}`" class="text-blue-600">
+                <Link :href="`/admin/blog/${blogPost.id}`" class="text-blue-600">
                   {{ blogPost.title }}
                 </Link>
               </td>

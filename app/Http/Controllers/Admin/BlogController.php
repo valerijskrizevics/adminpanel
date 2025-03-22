@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\BlogPostRequest;
 use App\Models\BlogPost;
 use App\Models\User;
@@ -84,7 +85,7 @@ class BlogController extends Controller
          * @var User $currentUser
          */
         $currentUser = auth()->user();
-        if ($currentUser->cannot('', $blogPost)) {
+        if ($currentUser->cannot('delete', $blogPost)) {
             abort(403);
         }
 

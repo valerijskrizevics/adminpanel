@@ -1,8 +1,7 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
-import { computed } from 'vue';
 
 const props = defineProps({
   blogPost: Object,
@@ -15,7 +14,7 @@ const form = useForm({
 });
 
 function submit() {
-  form.put(`/blog/${props.blogPost.id}`, {
+  form.put(route('blog.update', props.blogPost.id), {
     onSuccess: () => {
       form.reset();
     },
@@ -75,8 +74,11 @@ function submit() {
           </div>
 
           <div class="flex justify-between mt-4">
-            <a href="/blog" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Back</a>
+            
+            <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Back</Link>
+          
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
+          
           </div>
         </form>
       </div>
