@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -42,6 +43,13 @@ const updatePermissions = () => {
   <Layout title="Manage Permissions">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
+
+        <!-- Breadcrumbs component -->
+        <Breadcrumbs :items="[
+          { label: 'Permissions', link: route('roles.index') },
+          { label: role.name.charAt(0).toUpperCase() + role.name.slice(1), link: '#'}
+        ]" />
+
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">
           Permissions for Role: {{ role.name.charAt(0).toUpperCase() + role.name.slice(1) }}
         </h1> 

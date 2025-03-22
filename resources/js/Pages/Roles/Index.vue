@@ -17,7 +17,7 @@ const props = defineProps({
           
           <!-- Breadcrumbs component -->
           <Breadcrumbs :items="[
-            { label: 'Permissions', link: route('roles.index') }
+            { label: 'Permissions', link: '#' }
           ]" />
 
           <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Roles Available</h1>

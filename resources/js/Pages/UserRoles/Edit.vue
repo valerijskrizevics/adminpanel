@@ -37,7 +37,7 @@ const updateRoles = () => {
         <!-- Breadcrumbs component -->
         <Breadcrumbs :items="[
           { label: 'Permissions', link: route('roles.index') },
-          { label: 'My Roles', link: route('user.roles.edit') }
+          { label: 'My Roles', link: '#' }
         ]" />
 
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">My Roles</h1>
