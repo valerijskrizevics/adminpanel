@@ -50,7 +50,7 @@ Route::post('/admin/roles/{roleName}/permissions', [PermissionController::class,
     ->middleware(['auth']);
 
 Route::get('/blog', [BlogController::class, 'index'])->name('landing.blog.index');
-Route::get('/blog/{blogPost}', [BlogController::class, 'show'])->name('landing.blog.show');
+Route::get('/blog/{post}', [BlogController::class, 'show'])->name('landing.blog.show');
 
 Route::middleware(['can:view blog'])->group(function() {
     Route::get('/admin/blog', [AdminBlogController::class, 'index'])->name('blog.index');
@@ -59,11 +59,11 @@ Route::middleware(['can:view blog'])->group(function() {
 Route::middleware(['can:manage blog'])->group(function() {
     Route::get('/admin/blog/create', [AdminBlogController::class, 'create'])->name('blog.create');
     Route::post('/admin/blog/', [AdminBlogController::class, 'store'])->name('blog.store');
-    Route::get('/admin/blog/{blogPost}/edit', [AdminBlogController::class, 'edit'])->name('blog.edit');
-    Route::put('/admin/blog/{blogPost}', [AdminBlogController::class, 'update'])->name('blog.update');
-    Route::delete('/admin/blog/{blogPost}', [AdminBlogController::class, 'destroy'])->name('blog.destroy');
+    Route::get('/admin/blog/{post}/edit', [AdminBlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/admin/blog/{post}', [AdminBlogController::class, 'update'])->name('blog.update');
+    Route::delete('/admin/blog/{post}', [AdminBlogController::class, 'destroy'])->name('blog.destroy');
 });
 
 Route::middleware(['can:view blog'])->group(function() {
-    Route::get('/admin/blog/{blogPost}', [AdminBlogController::class, 'show'])->name('blog.show');
+    Route::get('/admin/blog/{post}', [AdminBlogController::class, 'show'])->name('blog.show');
 });

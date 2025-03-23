@@ -3,18 +3,14 @@ import { Link, useForm } from '@inertiajs/vue3';
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
-const props = defineProps({
-  post: Object,
-});
-
 const form = useForm({
-  title: props.post.title,
-  short_description: props.post.short_description,
-  text: props.post.text ?? '',
+  title: '',
+  short_description: '',
+  text: '',
 });
 
 function submit() {
-  form.put(route('blog.update', props.post.id), {
+  form.post(route('blog.store'), {
     onSuccess: () => {
       form.reset();
     },
@@ -23,17 +19,17 @@ function submit() {
 </script>
 
 <template>
-  <Layout title="Edit Blog Post">
+  <Layout title="New Blog Post">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 
         <!-- Breadcrumbs component -->
         <Breadcrumbs :items="[
           { label: 'Blog', link: route('blog.index') },
-          { label: 'Edit Post', link: '#' }
+          { label: 'New Post', link: '#' }
         ]" />
 
-        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Edit Blog Post</h1>
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">New Blog Post</h1>
 
         <form @submit.prevent="submit" class="sm-ml-6">
           <div class="mb-4">
@@ -75,8 +71,10 @@ function submit() {
 
           <div class="flex justify-between mt-4">
             
-            <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Back</Link>
-          
+            <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+              Back
+            </Link>
+            
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
           
           </div>

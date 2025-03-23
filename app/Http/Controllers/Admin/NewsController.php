@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BlogPostRequest;
-use App\Models\BlogPost;
+use App\Models\NewsPost;
 use App\Models\User;
 use Inertia\Inertia;
 
@@ -12,14 +11,14 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $posts = BlogPost::with('user:id,name')->get();
+        $newsPosts = NewsPost::with('user:id,name')->get();
         /**
          * @var User $currentUser
          */
         $currentUser = auth()->user();
-        return Inertia::render('Blog/Index', [
-            'posts' => $posts,
-            'canManage' => $currentUser->can('manage blog'),
+        return Inertia::render('News/Index', [
+            'posts' => $newsPosts,
+            'canManage' => $currentUser->can('manage news'),
             'canManageAny' => $currentUser->hasRole('admin'),
             'currentUser' => $currentUser->only('id'),
         ]);
@@ -27,28 +26,28 @@ class BlogController extends Controller
 
     public function create()
     {
-        return Inertia::render('Blog/Create');
+        return Inertia::render('News/Create');
     }
 
-    public function store(BlogPostRequest $request)
+    public function store(NewsPostRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = auth()->id();
-        BlogPost::create($data);
+        NewsPost::create($data);
         
-        return redirect()->route('blog.index')->with('success', 'Blog post created');
+        return redirect()->route('news.index')->with('success', 'News post created');
     }
 
-    public function show(BlogPost $post)
+    public function show(NewsPost $post)
     {
         $post->with('user:id,name');
 
-        return Inertia::render('Blog/Show', [
+        return Inertia::render('News/Show', [
             'post' => $post->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
         ]);
     }
 
-    public function edit(BlogPost $post)
+    public function edit(NewsPost $post)
     {
         /**
          * @var User $currentUser
@@ -58,12 +57,12 @@ class BlogController extends Controller
             abort(403);
         }
 
-        return Inertia::render('Blog/Edit', [
+        return Inertia::render('News/Edit', [
             'post' => $post,
         ]);
     }
 
-    public function update(BlogPostRequest $request, BlogPost $post)
+    public function update(NewsPostRequest $request, NewsPost $post)
     {
         /**
          * @var User $currentUser
@@ -75,10 +74,10 @@ class BlogController extends Controller
 
         $post->update($request->validated());
 
-        return redirect()->route('blog.index')->with('success', 'Blog post updated');
+        return redirect()->route('news.index')->with('success', 'Blog post updated');
     }
 
-    public function destroy(BlogPost $post)
+    public function destroy(NewsPost $post)
     {
         /**
          * @var User $currentUser
@@ -90,6 +89,6 @@ class BlogController extends Controller
 
         $post->delete();
 
-        return redirect()->route('blog.index')->with('success', 'Blog post deleted');
+        return redirect()->route('news.index')->with('success', 'Blog post deleted');
     }
 }
