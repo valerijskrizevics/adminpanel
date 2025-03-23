@@ -5,6 +5,8 @@ import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   post: Object,
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
 });
 
 const form = useForm({
@@ -23,7 +25,7 @@ function submit() {
 </script>
 
 <template>
-  <Layout title="Edit Blog Post">
+  <Layout title="Edit Blog Post" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 

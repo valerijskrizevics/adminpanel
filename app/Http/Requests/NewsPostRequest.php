@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use HTMLPurifier;
 use HTMLPurifier_Config;
 
-class BlogPostRequest extends FormRequest
+class NewsPostRequest extends FormRequest
 {
     protected array $sanitizedData = [];
     protected array $xssDetectedFields = [];

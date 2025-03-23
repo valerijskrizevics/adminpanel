@@ -32,7 +32,15 @@ class PermissionController extends Controller
             }
         }
 
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+
         return inertia('RolePermissions/Index', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+            
             'role' => $role,
             'groupedPermissions' => $groupedPermissions,
             'permissions' => $role->permissions->pluck('name')->toArray(),

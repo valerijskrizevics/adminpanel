@@ -3,6 +3,11 @@ import { Link, useForm } from '@inertiajs/vue3';
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
+defineProps({
+    canViewBlog: Boolean,
+    canViewNews: Boolean,
+});
+
 const form = useForm({
   title: '',
   short_description: '',
@@ -19,7 +24,7 @@ function submit() {
 </script>
 
 <template>
-  <Layout title="New Blog Post">
+  <Layout title="New Blog Post" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 

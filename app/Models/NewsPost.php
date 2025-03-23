@@ -14,13 +14,7 @@ class NewsPost extends Model
         'title',
         'short_description',
         'text',
-    ];
-
-    // You can also add validation rules if needed
-    public static $rules = [
-        'title' => 'required|max:100',
-        'short_description' => 'required|max:255',
-        'text' => 'nullable',
+        'user_id',
     ];
 
     public function user()

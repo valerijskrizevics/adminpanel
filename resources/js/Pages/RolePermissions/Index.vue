@@ -5,10 +5,12 @@ import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
-    flash: Object,
-    role: Object,
-    groupedPermissions: Object,
-    permissions: Array,
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
+  flash: Object,
+  role: Object,
+  groupedPermissions: Object,
+  permissions: Array,
 });
 
 // Destructure props for easy access
@@ -24,23 +26,23 @@ const form = useForm({
 
 // Update permissions method
 const updatePermissions = () => {
-    // Update form's permissions to match the current selected permissions array
-    form.permissions = selectedPermissions.value;
+  // Update form's permissions to match the current selected permissions array
+  form.permissions = selectedPermissions.value;
 
-    // Send form data to backend to update permissions for the role
-    form.post(route('roles.permissions.update', { roleName: role.name }), {
-        onSuccess: () => {
-            // Success handling (flash message will be shown automatically)
-        },
-        onError: (errors) => {
-            // Error handling (e.g., validation errors)
-        },
-    });
+  // Send form data to backend to update permissions for the role
+  form.post(route('roles.permissions.update', { roleName: role.name }), {
+    onSuccess: () => {
+      // Success handling (flash message will be shown automatically)
+    },
+    onError: (errors) => {
+      // Error handling (e.g., validation errors)
+    },
+  });
 };
 </script>
 
 <template>
-  <Layout title="Manage Permissions">
+  <Layout title="Manage Permissions" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 

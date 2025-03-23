@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
     
-use App\Models\BlogPost;
+use App\Models\NewsPost;
 use Inertia\Inertia;
     
-class BlogController extends Controller
+class NewsController extends Controller
 {
     public function index()
     {
-        $posts = BlogPost::with('user:id,name')
+        $posts = NewsPost::with('user:id,name')
             ->latest()
             ->paginate(9);
     
@@ -21,7 +21,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(BlogPost $post)
+    public function show(NewsPost $post)
     {
         $post->with('user:id,name');
 

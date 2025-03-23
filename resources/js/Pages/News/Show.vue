@@ -6,17 +6,19 @@ import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   post: Object,
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
 });
 </script>
 
 <template>
-  <Layout title="View Blog Post">
+  <Layout title="View News Post" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="container mx-auto p-6 max-w-2xl">
         <div class="bg-white p-6">
           <!-- Breadcrumbs component -->
           <Breadcrumbs :items="[
-            { label: 'Blog', link: route('blog.index') },
+            { label: 'News', link: route('news.index') },
             { label: 'View Post', link: '#' }
           ]" />
             
@@ -31,7 +33,7 @@ const props = defineProps({
           <p v-html="post.text.replace(/\n+/g, '<br>')" class="mt-4 text-gray-700"></p>
         
           <div class="flex justify-start mt-4 sm-ml-6">
-            <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+            <Link :href="route('news.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
               Back
             </Link>
           </div>

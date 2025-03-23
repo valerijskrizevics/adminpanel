@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from 'vue';
+import { ref } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
@@ -7,6 +7,8 @@ import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   posts: Array,
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
   canManage: Boolean,
   canManageAny: Boolean,
   currentUser: Object,
@@ -30,7 +32,7 @@ const deletePost = () => {
 </script>
 
 <template>
-  <Layout title="Manage Blog Posts">
+  <Layout title="Manage Blog Posts" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 
@@ -62,7 +64,7 @@ const deletePost = () => {
           <tbody>
             <tr v-for="post in posts" :key="post.id">
               <td class="text-left align-top px-4 py-2">
-                <Link :href="`/admin/blog/${post.id}`" class="text-blue-600">
+                <Link :href="route('blog.show', post.id)" class="text-blue-600">
                   {{ post.title }}
                 </Link>
               </td>

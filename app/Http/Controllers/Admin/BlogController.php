@@ -17,7 +17,11 @@ class BlogController extends Controller
          * @var User $currentUser
          */
         $currentUser = auth()->user();
+        
         return Inertia::render('Blog/Index', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+        
             'posts' => $posts,
             'canManage' => $currentUser->can('manage blog'),
             'canManageAny' => $currentUser->hasRole('admin'),
@@ -27,7 +31,15 @@ class BlogController extends Controller
 
     public function create()
     {
-        return Inertia::render('Blog/Create');
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+
+        return Inertia::render('Blog/Create', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+        ]);
     }
 
     public function store(BlogPostRequest $request)
@@ -43,7 +55,15 @@ class BlogController extends Controller
     {
         $post->with('user:id,name');
 
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+        
         return Inertia::render('Blog/Show', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+
             'post' => $post->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
         ]);
     }
@@ -59,6 +79,9 @@ class BlogController extends Controller
         }
 
         return Inertia::render('Blog/Edit', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+            
             'post' => $post,
         ]);
     }

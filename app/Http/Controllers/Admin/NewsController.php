@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsPostRequest;
 use App\Models\NewsPost;
 use App\Models\User;
 use Inertia\Inertia;
 
-class BlogController extends Controller
+class NewsController extends Controller
 {
     public function index()
     {
@@ -16,7 +17,11 @@ class BlogController extends Controller
          * @var User $currentUser
          */
         $currentUser = auth()->user();
+        
         return Inertia::render('News/Index', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+
             'posts' => $newsPosts,
             'canManage' => $currentUser->can('manage news'),
             'canManageAny' => $currentUser->hasRole('admin'),
@@ -26,7 +31,15 @@ class BlogController extends Controller
 
     public function create()
     {
-        return Inertia::render('News/Create');
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+        
+        return Inertia::render('News/Create', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+        ]);
     }
 
     public function store(NewsPostRequest $request)
@@ -42,7 +55,15 @@ class BlogController extends Controller
     {
         $post->with('user:id,name');
 
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+
         return Inertia::render('News/Show', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+
             'post' => $post->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
         ]);
     }
@@ -58,6 +79,9 @@ class BlogController extends Controller
         }
 
         return Inertia::render('News/Edit', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+
             'post' => $post,
         ]);
     }

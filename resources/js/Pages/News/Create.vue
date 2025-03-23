@@ -3,6 +3,11 @@ import { Link, useForm } from '@inertiajs/vue3';
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
+defineProps({
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
+});
+
 const form = useForm({
   title: '',
   short_description: '',
@@ -10,7 +15,7 @@ const form = useForm({
 });
 
 function submit() {
-  form.post(route('blog.store'), {
+  form.post(route('news.store'), {
     onSuccess: () => {
       form.reset();
     },
@@ -19,17 +24,17 @@ function submit() {
 </script>
 
 <template>
-  <Layout title="New Blog Post">
+  <Layout title="New News Post" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 
         <!-- Breadcrumbs component -->
         <Breadcrumbs :items="[
-          { label: 'Blog', link: route('blog.index') },
+          { label: 'News', link: route('news.index') },
           { label: 'New Post', link: '#' }
         ]" />
 
-        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">New Blog Post</h1>
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">New News Post</h1>
 
         <form @submit.prevent="submit" class="sm-ml-6">
           <div class="mb-4">
@@ -71,7 +76,7 @@ function submit() {
 
           <div class="flex justify-between mt-4">
             
-            <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+            <Link :href="route('news.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
               Back
             </Link>
             

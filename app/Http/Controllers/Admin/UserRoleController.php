@@ -24,7 +24,16 @@ class UserRoleController extends Controller
         $user = Auth::user();
         $roles = Role::all(['id', 'name']);
 
+        /**
+         * @var User $currentUser
+         */
+        $currentUser = auth()->user();
+        
+
         return Inertia::render('UserRoles/Edit', [
+            'canViewBlog' => $currentUser->can('view blog'),
+            'canViewNews' => $currentUser->can('view news'),
+
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,

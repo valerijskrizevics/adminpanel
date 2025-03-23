@@ -6,11 +6,13 @@ import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   post: Object,
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
 });
 </script>
 
 <template>
-  <Layout title="View Blog Post">
+  <Layout title="View Blog Post" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="container mx-auto p-6 max-w-2xl">
         <div class="bg-white p-6">

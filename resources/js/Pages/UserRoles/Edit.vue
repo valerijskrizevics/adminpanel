@@ -5,9 +5,11 @@ import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
-    user: Object,
-    roles: Array,
-    errors: Object, // Make sure to accept errors as props
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
+  user: Object,
+  roles: Array,
+  errors: Object,
 });
 
 const form = useForm({
@@ -30,7 +32,7 @@ const updateRoles = () => {
 </script>
 
 <template>
-  <Layout title="My Roles">
+  <Layout title="My Roles" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
         

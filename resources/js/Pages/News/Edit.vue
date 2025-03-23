@@ -5,6 +5,8 @@ import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   post: Object,
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
 });
 
 const form = useForm({
@@ -14,7 +16,7 @@ const form = useForm({
 });
 
 function submit() {
-  form.put(route('blog.update', props.post.id), {
+  form.put(route('news.update', props.post.id), {
     onSuccess: () => {
       form.reset();
     },
@@ -23,17 +25,17 @@ function submit() {
 </script>
 
 <template>
-  <Layout title="Edit Blog Post">
+  <Layout title="Edit News Post" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 
         <!-- Breadcrumbs component -->
         <Breadcrumbs :items="[
-          { label: 'Blog', link: route('blog.index') },
+          { label: 'News', link: route('news.index') },
           { label: 'Edit Post', link: '#' }
         ]" />
 
-        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Edit Blog Post</h1>
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Edit News Post</h1>
 
         <form @submit.prevent="submit" class="sm-ml-6">
           <div class="mb-4">
@@ -75,7 +77,7 @@ function submit() {
 
           <div class="flex justify-between mt-4">
             
-            <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Back</Link>
+            <Link :href="route('news.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Back</Link>
           
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save</button>
           

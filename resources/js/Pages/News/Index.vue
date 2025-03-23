@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from 'vue';
+import { ref } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
@@ -7,6 +7,8 @@ import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   posts: Array,
+  canViewBlog: Boolean,
+  canViewNews: Boolean,
   canManage: Boolean,
   canManageAny: Boolean,
   currentUser: Object,
@@ -23,30 +25,30 @@ const confirmDelete = (post) => {
 
 const deletePost = () => {
   if (postToDelete.value) {
-    router.delete(route('blog.destroy', postToDelete.value.id));
+    router.delete(route('news.destroy', postToDelete.value.id));
     showConfirmModal.value = false;
   }
 };
 </script>
 
 <template>
-  <Layout title="Manage Blog Posts">
+  <Layout title="Manage News Posts" :canViewBlog="canViewBlog" :canViewNews="canViewNews">
     <div class="bg-white min-h-screen">
       <div class="max-w-3xl mx-auto p-6 bg-white">
 
         <!-- Breadcrumbs component -->
         <Breadcrumbs :items="[
-          { label: 'Blog', link: '#' }
+          { label: 'News', link: '#' }
         ]" />
 
-        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">Blog Posts</h1>
+        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">News Posts</h1>
 
         <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded am-ml-6">
           {{ flash.success }}
         </div>
 
         <div class="mb-4 sm-ml-6">
-          <Link v-if="canManage" :href="route('blog.create')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          <Link v-if="canManage" :href="route('news.create')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             New
           </Link>
         </div>
@@ -62,13 +64,13 @@ const deletePost = () => {
           <tbody>
             <tr v-for="post in posts" :key="post.id">
               <td class="text-left align-top px-4 py-2">
-                <Link :href="`/admin/blog/${post.id}`" class="text-blue-600">
+                <Link :href="route('news.show', post.id)" class="text-blue-600">
                   {{ post.title }}
                 </Link>
               </td>
               <td class="text-left align-top px-4 py-2 sm-whitespace-nowrap">{{ post.user.name }}</td>
               <td v-if="canManage && (canManageAny || post.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
-                <Link :href="route('blog.edit', post.id)" class="text-blue-600">Edit</Link>
+                <Link :href="route('news.edit', post.id)" class="text-blue-600">Edit</Link>
                 |
                 <button @click.prevent="confirmDelete(post)" class="text-red-600">X</button>
               </td>
@@ -80,7 +82,7 @@ const deletePost = () => {
 
     <ConfirmationModal :show="showConfirmModal" @close="showConfirmModal = false">
       <template #title>
-        Delete Blog Post
+        Delete News Post
       </template>
 
       <template #content>

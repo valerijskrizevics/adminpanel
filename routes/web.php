@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +50,25 @@ Route::post('/admin/roles/{roleName}/permissions', [PermissionController::class,
     ->where('roleName', '[a-z]+')
     ->name('roles.permissions.update')
     ->middleware(['auth']);
+
+Route::get('/', [NewsController::class, 'index'])->name('landing.news.index');
+Route::get('/news/{post}', [NewsController::class, 'show'])->name('landing.news.show');
+
+Route::middleware(['can:view news'])->group(function() {
+    Route::get('/admin/news', [AdminNewsController::class, 'index'])->name('news.index');
+});
+
+Route::middleware(['can:manage news'])->group(function() {
+    Route::get('/admin/news/create', [AdminNewsController::class, 'create'])->name('news.create');
+    Route::post('/admin/news/', [AdminNewsController::class, 'store'])->name('news.store');
+    Route::get('/admin/news/{post}/edit', [AdminNewsController::class, 'edit'])->name('news.edit');
+    Route::put('/admin/news/{post}', [AdminNewsController::class, 'update'])->name('news.update');
+    Route::delete('/admin/news/{post}', [AdminNewsController::class, 'destroy'])->name('news.destroy');
+});
+
+Route::middleware(['can:view news'])->group(function() {
+    Route::get('/admin/news/{post}', [AdminNewsController::class, 'show'])->name('news.show');
+});
 
 Route::get('/blog', [BlogController::class, 'index'])->name('landing.blog.index');
 Route::get('/blog/{post}', [BlogController::class, 'show'])->name('landing.blog.show');
