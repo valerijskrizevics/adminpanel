@@ -48,7 +48,7 @@ class NewsController extends Controller
         $data['user_id'] = auth()->id();
         NewsPost::create($data);
         
-        return redirect()->route('news.index')->with('success', 'News post created');
+        return redirect()->route('news.index');
     }
 
     public function show(NewsPost $post)
@@ -98,7 +98,7 @@ class NewsController extends Controller
 
         $post->update($request->validated());
 
-        return redirect()->route('news.index')->with('success', 'Blog post updated');
+        return redirect()->route('news.index');
     }
 
     public function destroy(NewsPost $post)
@@ -113,6 +113,6 @@ class NewsController extends Controller
 
         $post->delete();
 
-        return redirect()->route('news.index')->with('success', 'Blog post deleted');
+        return redirect()->route('news.index');
     }
 }

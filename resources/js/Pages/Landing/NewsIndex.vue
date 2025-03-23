@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <Layout :title="News" :isGuest="isGuest" :canLogin="canLogin" :canRegister="canRegister">
+  <Layout :title="News - Latest" :isGuest="isGuest" :canLogin="canLogin" :canRegister="canRegister">
     <div class="bg-white min-h-screen">
       <div class="container mx-auto p-6">
     `   <h1 class="text-3xl font-bold mb-6">News</h1>

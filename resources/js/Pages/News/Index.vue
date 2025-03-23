@@ -12,7 +12,6 @@ const props = defineProps({
   canManage: Boolean,
   canManageAny: Boolean,
   currentUser: Object,
-  flash: Object,
 });
 
 const showConfirmModal = ref(false);
@@ -42,10 +41,6 @@ const deletePost = () => {
         ]" />
 
         <h1 class="text-2xl font-semibold mb-4 sm-ml-6">News Posts</h1>
-
-        <div v-if="flash?.success" class="bg-green-500 text-white p-4 mb-4 rounded am-ml-6">
-          {{ flash.success }}
-        </div>
 
         <div class="mb-4 sm-ml-6">
           <Link v-if="canManage" :href="route('news.create')" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">

@@ -9,7 +9,6 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-    // Show roles and permissions page for a specific role by name
     public function index($roleName)
     {
         // Find the role by its name
@@ -47,7 +46,6 @@ class PermissionController extends Controller
         ]);
     }
 
-    // Update permissions for a role by name
     public function updatePermissions(Request $request, $roleName)
     {
         // Find the role by its name
@@ -69,6 +67,6 @@ class PermissionController extends Controller
         }
 
         // Return a success message
-        return redirect()->route('roles.permissions', ['roleName' => $role->name])->with('success', 'Permissions updated successfully!');
+        return redirect()->route('roles.permissions', ['roleName' => $role->name]);
     }
 }

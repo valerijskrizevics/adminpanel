@@ -48,7 +48,7 @@ class BlogController extends Controller
         $data['user_id'] = auth()->id();
         BlogPost::create($data);
         
-        return redirect()->route('blog.index')->with('success', 'Blog post created');
+        return redirect()->route('blog.index');
     }
 
     public function show(BlogPost $post)
@@ -98,7 +98,7 @@ class BlogController extends Controller
 
         $post->update($request->validated());
 
-        return redirect()->route('blog.index')->with('success', 'Blog post updated');
+        return redirect()->route('blog.index');
     }
 
     public function destroy(BlogPost $post)
@@ -113,6 +113,6 @@ class BlogController extends Controller
 
         $post->delete();
 
-        return redirect()->route('blog.index')->with('success', 'Blog post deleted');
+        return redirect()->route('blog.index');
     }
 }
