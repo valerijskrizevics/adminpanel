@@ -4,7 +4,6 @@ import { Head, Link, router } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 defineProps({
     title: String,
@@ -49,13 +48,13 @@ const logout = () => {
 
                             <!-- Navigation Links -->
 
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div class="space-x-8 sm:-my-px sm:ms-10 flex">
                                 <NavLink :href="route('landing.blog.index')" :active="route().current('landing.blog.index')">
                                     Blog
                                 </NavLink>
                             </div>
 
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div class="space-x-8 sm:-my-px sm:ms-10 flex">
                                 <NavLink :href="route('landing.blog.index')" :active="route().current('landing.blog.index')">
                                     News
                                 </NavLink>
@@ -63,34 +62,32 @@ const logout = () => {
                         </div>
 
                         <!-- Header with login and registration links -->
-                        <div class="flex justify-end mb-6">
-                            <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
-                                <Link
-                                    v-if="!isGuest"
-                                    :href="route('dashboard')"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Admin Panel
-                                    </Link>
+                        <div class="space-x-8 sm:-my-px sm:ms-10 flex">
+                            <NavLink
+                                v-if="!isGuest"
+                                :href="route('dashboard')"
+                                :active="route().current('dashboard')"
+                            >
+                                Admin Panel
+                            </NavLink>
 
-                                    <template v-else>
-                                    <Link
-                                        :href="route('login')"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Log in
-                                    </Link>
+                            <template v-else>
+                                <NavLink
+                                    :href="route('login')"
+                                    :active="route().current('login')"                                >
+                                >
+                                    Log in
+                                </NavLink>
 
-                                    <Link
-                                        v-if="canRegister"
-                                        :href="route('register')"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Register
-                                    </Link>
-                                </template>
-                            </nav>
-                        </div>     
+                                <NavLink
+                                    v-if="canRegister"
+                                    :href="route('register')"
+                                    :active="route().current('register')"
+                                >
+                                    Register
+                                </NavLink>
+                            </template>
+                        </div> 
                     </div>
                 </div>
             </nav>
