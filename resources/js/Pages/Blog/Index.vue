@@ -13,17 +13,8 @@ const props = defineProps({
   flash: Object,
 });
 
-console.log(props.blogPosts);
-
 const showConfirmModal = ref(false);
-const selectedBlogPost = ref(null);
 const blogPostToDelete = ref(null);
-
-const openEditModal = async (blogPost) => {
-  selectedBlogPost.value = blogPost;
-  await nextTick();
-  showEditModal.value = true;
-};
 
 const confirmDelete = (blogPost) => {
   blogPostToDelete.value = blogPost;
