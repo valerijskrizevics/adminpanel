@@ -18,7 +18,7 @@ class BlogController extends Controller
          */
         $currentUser = auth()->user();
         return Inertia::render('Blog/Index', [
-            'blogPosts' => $blogPosts,
+            'posts' => $blogPosts,
             'canManage' => $currentUser->can('manage blog'),
             'canManageAny' => $currentUser->hasRole('admin'),
             'currentUser' => $currentUser->only('id'),
@@ -44,7 +44,7 @@ class BlogController extends Controller
         $blogPost->with('user:id,name');
 
         return Inertia::render('Blog/Show', [
-            'blogPost' => $blogPost->only('title', 'short_description', 'text', 'created_at', 'user'),
+            'post' => $blogPost->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
         ]);
     }
 
@@ -59,7 +59,7 @@ class BlogController extends Controller
         }
 
         return Inertia::render('Blog/Edit', [
-            'blogPost' => $blogPost,
+            'post' => $blogPost,
         ]);
     }
 

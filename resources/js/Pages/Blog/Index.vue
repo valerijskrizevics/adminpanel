@@ -6,7 +6,7 @@ import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
-  blogPosts: Array,
+  posts: Array,
   canManage: Boolean,
   canManageAny: Boolean,
   currentUser: Object,
@@ -14,16 +14,16 @@ const props = defineProps({
 });
 
 const showConfirmModal = ref(false);
-const blogPostToDelete = ref(null);
+const postToDelete = ref(null);
 
-const confirmDelete = (blogPost) => {
-  blogPostToDelete.value = blogPost;
+const confirmDelete = (post) => {
+  postToDelete.value = post;
   showConfirmModal.value = true;
 };
 
 const deletePost = () => {
-  if (blogPostToDelete.value) {
-    router.delete(route('blog.destroy', blogPostToDelete.value.id));
+  if (postToDelete.value) {
+    router.delete(route('blog.destroy', postToDelete.value.id));
     showConfirmModal.value = false;
   }
 };
@@ -60,17 +60,17 @@ const deletePost = () => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="blogPost in blogPosts" :key="blogPost.id">
+            <tr v-for="post in posts" :key="post.id">
               <td class="text-left align-top px-4 py-2">
-                <Link :href="`/admin/blog/${blogPost.id}`" class="text-blue-600">
-                  {{ blogPost.title }}
+                <Link :href="`/admin/blog/${post.id}`" class="text-blue-600">
+                  {{ post.title }}
                 </Link>
               </td>
-              <td class="text-left align-top px-4 py-2 sm-whitespace-nowrap">{{ blogPost.user.name }}</td>
-              <td v-if="canManage && (canManageAny || blogPost.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
-                <Link :href="route('blog.edit', blogPost.id)" class="text-blue-600">Edit</Link>
+              <td class="text-left align-top px-4 py-2 sm-whitespace-nowrap">{{ post.user.name }}</td>
+              <td v-if="canManage && (canManageAny || post.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
+                <Link :href="route('blog.edit', post.id)" class="text-blue-600">Edit</Link>
                 |
-                <button @click.prevent="confirmDelete(blogPost)" class="text-red-600">X</button>
+                <button @click.prevent="confirmDelete(post)" class="text-red-600">X</button>
               </td>
             </tr>
           </tbody>

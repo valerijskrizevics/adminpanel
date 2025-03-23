@@ -5,37 +5,36 @@ import Breadcrumbs from '@/Components/Breadcrumbs.vue';
 import Layout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
-  blogPost: Object,
+  post: Object,
 });
 </script>
 
 <template>
   <Layout title="View Blog Post">
     <div class="bg-white min-h-screen">
-      <div class="max-w-3xl mx-auto p-6 bg-white">
-
-        <!-- Breadcrumbs component -->
-        <Breadcrumbs :items="[
-          { label: 'Blog', link: route('blog.index') },
-          { label: 'View Post', link: '#' }
-        ]" />
-
-        <h1 class="text-2xl font-semibold mb-4 sm-ml-6">{{ blogPost.title }}</h1>
+      <div class="container mx-auto p-6 max-w-2xl">
+        <div class="bg-white p-6">
+          <!-- Breadcrumbs component -->
+          <Breadcrumbs :items="[
+            { label: 'Blog', link: route('blog.index') },
+            { label: 'View Post', link: '#' }
+          ]" />
+            
+          <img :src="'/photos/' + (post.id % 10) + '.jpg'" class="rounded-md w-full h-60 object-cover">
+          <h1 class="text-3xl font-bold mt-4">{{ post.title }}</h1>
+          <p class="text-sm text-gray-500 mt-2">
+            <strong>{{ post.user.name }}</strong> • {{ new Date(post.created_at).toLocaleDateString('ru-RU') }}
+          </p>
         
-        <p class="text-gray-500 sm-ml-6">By {{ blogPost.user?.name }} on {{ blogPost.created_at.split('T')[0] }}</p>
-      
-        <div class="mb-4 sm-ml-6">
-          <p><em>{{ blogPost.short_description }}</em></p>
-        </div>
+          <p class="mt-4 text-gray-700 italic">{{ post.short_description }}</p>
 
-        <div class="mb-4 sm-ml-6">
-          <p v-html="blogPost.text.replace(/\n+/g, '<br>')"></p>
-        </div>
-
-        <div class="flex justify-start mt-4 sm-ml-6">
-          <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
-            Back
-          </Link>
+          <p v-html="post.text.replace(/\n+/g, '<br>')" class="mt-4 text-gray-700"></p>
+        
+          <div class="flex justify-start mt-4 sm-ml-6">
+            <Link :href="route('blog.index')" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+              Back
+            </Link>
+          </div>
         </div>
       </div>
     </div>
