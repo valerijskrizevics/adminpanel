@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Models\NewsPost;
 use App\Models\User;
 
-class BlogPostPolicy
+class NewsPostPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -50,7 +50,7 @@ class BlogPostPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, BlogPost $blogPost): bool
+    public function restore(User $user, NewsPost $post): bool
     {
         return false;
     }
@@ -58,7 +58,7 @@ class BlogPostPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, BlogPost $blogPost): bool
+    public function forceDelete(User $user, NewsPost $post): bool
     {
         return false;
     }
