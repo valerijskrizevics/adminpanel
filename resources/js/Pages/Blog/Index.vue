@@ -64,7 +64,6 @@ const deletePost = () => {
           <thead>
             <tr>
               <th class="text-left px-4 py-2">Title</th>
-              <th class="text-left px-4 py-2">Short Description</th>
               <th class="text-left px-4 py-2">User</th>
               <th v-if="canManage" class="text-left px-4 py-2">Actions</th>
             </tr>
@@ -76,8 +75,7 @@ const deletePost = () => {
                   {{ blogPost.title }}
                 </Link>
               </td>
-              <td class="text-left align-top px-4 py-2">{{ blogPost.short_description }}</td>
-              <td class="text-left align-top px-4 py-2 whitespace-nowrap">{{ blogPost.user.name }}</td>
+              <td class="text-left align-top px-4 py-2 sm-whitespace-nowrap">{{ blogPost.user.name }}</td>
               <td v-if="canManage && (canManageAny || blogPost.user.id === currentUser.id )" class="text-left align-top px-4 py-2 whitespace-nowrap">
                 <Link :href="route('blog.edit', blogPost.id)" class="text-blue-600">Edit</Link>
                 |

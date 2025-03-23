@@ -40,12 +40,14 @@ Route::middleware(['auth'])->group(function () {
 // Show permissions page for a specific role by name
 Route::get('/admin/roles/{roleName}', [PermissionController::class, 'index'])
     ->where('roleName', '[a-z]+')
-    ->name('roles.permissions');
+    ->name('roles.permissions')
+    ->middleware(['auth']);
 
 // Update roles' permissions
 Route::post('/admin/roles/{roleName}/permissions', [PermissionController::class, 'updatePermissions'])
     ->where('roleName', '[a-z]+')
-    ->name('roles.permissions.update');
+    ->name('roles.permissions.update')
+    ->middleware(['auth']);
 
 Route::get('/blog', [BlogController::class, 'index'])->name('landing.blog.index');
 Route::get('/blog/{blogPost}', [BlogController::class, 'show'])->name('landing.blog.show');
