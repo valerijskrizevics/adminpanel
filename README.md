@@ -12,3 +12,4 @@
 - **php artisan migrate**
 - **php artisan db:seed** 
 7. Pārlūkā dodieties uz http://localhost, piereģistrējieties un notestējiet sistēmu
+8. Izveidoto kodu pēc jetstream instalācijas var apskatīties šeit https://github.com/valerijskrizevics/adminpanel/pull/1
