@@ -27,6 +27,9 @@ class BlogController extends Controller
 
         return Inertia::render('Landing/BlogShow', [
             'post' => $blogPost->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
+            'isGuest' => !auth()->id(),
+            'canLogin' => true,
+            'canRegister' => true,
         ]);
     }
 }
