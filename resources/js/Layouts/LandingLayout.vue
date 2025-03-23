@@ -52,27 +52,16 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Header with login and registration links -->
             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-              <NavLink
-                v-if="!isGuest"
-                :href="route('dashboard')"
-                :active="route().current('dashboard')"
-              >
+              <NavLink v-if="!isGuest" :href="route('dashboard')" :active="route().current('dashboard')">
                 Admin Panel
               </NavLink>
 
               <template v-else>
-                <NavLink
-                  :href="route('login')"
-                  :active="route().current('login')"                                >
-                >
+                <NavLink :href="route('login')" :active="route().current('login')">
                   Log in
                 </NavLink>
 
-                <NavLink
-                  v-if="canRegister"
-                  :href="route('register')"
-                  :active="route().current('register')"
-                >
+                <NavLink v-if="canRegister" :href="route('register')" :active="route().current('register')">
                   Register
                 </NavLink>
               </template>
