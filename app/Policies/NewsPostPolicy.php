@@ -13,7 +13,7 @@ class BlogPostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view blog');
+        return $user->can('view news');
     }
 
     /**
@@ -21,7 +21,7 @@ class BlogPostPolicy
      */
     public function view(User $user, BlogPost $blogPost): bool
     {
-        return $user->can('view blog'); // Unused - checked by spatie middleware
+        return $user->can('view news'); // Unused - checked by spatie middleware
     }
 
     /**
@@ -29,7 +29,7 @@ class BlogPostPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('manage blog'); // Unused - checked by spatie middleware
+        return $user->can('manage news'); // Unused - checked by spatie middleware
     }
 
     /**
@@ -37,7 +37,7 @@ class BlogPostPolicy
      */
     public function update(User $user, BlogPost $blogPost): bool
     {
-        return $user->can('manage blog') && ($blogPost->user_id === $user->id || $user->hasRole('admin'));
+        return $user->can('manage news') && ($blogPost->user_id === $user->id || $user->hasRole('admin'));
     }
 
     /**
@@ -45,7 +45,7 @@ class BlogPostPolicy
      */
     public function delete(User $user, BlogPost $blogPost): bool
     {
-        return $user->can('manage blog') && ($blogPost->user_id === $user->id || $user->hasRole('admin'));
+        return $user->can('manage news') && ($blogPost->user_id === $user->id || $user->hasRole('admin'));
     }
 
     /**
