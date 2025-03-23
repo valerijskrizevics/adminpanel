@@ -14,7 +14,7 @@ defineProps({
   <div class="container mx-auto p-6">
     
     <!-- Header with login and registration links -->
-    <div class="flex justify-end mb-6">
+    <!--<div class="flex justify-end mb-6">
       <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
         <Link
           v-if="!isGuest"
@@ -41,7 +41,7 @@ defineProps({
           </Link>
         </template>
       </nav>
-    </div>
+    </div>-->
 
     <h1 class="text-3xl font-bold mb-6">From the blogs</h1>
     

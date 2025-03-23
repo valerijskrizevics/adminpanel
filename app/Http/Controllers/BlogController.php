@@ -26,7 +26,7 @@ class BlogController extends Controller
         $blogPost->with('user:id,name');
 
         return Inertia::render('Landing/BlogShow', [
-            'blogPost' => $blogPost->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
+            'post' => $blogPost->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
         ]);
     }
 }
