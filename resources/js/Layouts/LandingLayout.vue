@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 defineProps({
     title: String,
@@ -105,6 +106,23 @@ const showingNavigationDropdown = ref(false);
                 </svg>
               </button>
             </div>
+          </div>
+        </div>
+
+        <!-- Responsive Navigation Menu -->
+        <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+          <div class="pt-2 pb-3 space-y-1">
+            <ResponsiveNavLink :href="route('landing.blog.index')" :active="route().current('landing.blog.index')">
+              Blog
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink :href="route('landing.blog.index')" :active="route().current('landing.blog.index')">
+              News
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+              Admin Panel
+            </ResponsiveNavLink>
           </div>
         </div>
       </nav>
