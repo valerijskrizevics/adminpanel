@@ -110,9 +110,19 @@ const showingNavigationDropdown = ref(false);
               Blog
             </ResponsiveNavLink>
 
-            <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+            <ResponsiveNavLink v-if="!isGuest" :href="route('dashboard')" :active="route().current('dashboard')">
               Admin Panel
             </ResponsiveNavLink>
+
+            <template v-else>
+              <ResponsiveNavLink :href="route('login')" :active="route().current('login')">
+                Log in
+              </ResponsiveNavLink>
+
+              <ResponsiveNavLink v-if="canRegister" :href="route('register')" :active="route().current('register')">
+                Register
+              </ResponsiveNavLink>
+            </template>
           </div>
         </div>
       </nav>
