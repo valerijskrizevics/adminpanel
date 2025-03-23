@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\BlogPost;
+use App\Models\NewsPost;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
-class BlogPostPolicy
+class NewsPostPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +18,7 @@ class BlogPostPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, BlogPost $blogPost): bool
+    public function view(User $user, NewsPost $post): bool
     {
         return $user->can('view news'); // Unused - checked by spatie middleware
     }
@@ -35,23 +34,23 @@ class BlogPostPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, BlogPost $blogPost): bool
+    public function update(User $user, NewsPost $post): bool
     {
-        return $user->can('manage news') && ($blogPost->user_id === $user->id || $user->hasRole('admin'));
+        return $user->can('manage news') && ($post->user_id === $user->id || $user->hasRole('admin'));
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, BlogPost $blogPost): bool
+    public function delete(User $user, NewsPost $post): bool
     {
-        return $user->can('manage news') && ($blogPost->user_id === $user->id || $user->hasRole('admin'));
+        return $user->can('manage news') && ($post->user_id === $user->id || $user->hasRole('admin'));
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, BlogPost $blogPost): bool
+    public function restore(User $user, NewsPost $post): bool
     {
         return false;
     }
@@ -59,7 +58,7 @@ class BlogPostPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, BlogPost $blogPost): bool
+    public function forceDelete(User $user, NewsPost $post): bool
     {
         return false;
     }
