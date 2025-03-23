@@ -13,7 +13,7 @@ class NewsController extends Controller
             ->latest()
             ->paginate(9);
     
-        return Inertia::render('Landing/BlogIndex', [
+        return Inertia::render('Landing/NewsIndex', [
             'posts' => $posts,
             'isGuest' => !auth()->id(),
             'canLogin' => true,
@@ -25,7 +25,7 @@ class NewsController extends Controller
     {
         $post->with('user:id,name');
 
-        return Inertia::render('Landing/BlogShow', [
+        return Inertia::render('Landing/NewsShow', [
             'post' => $post->only('id', 'title', 'short_description', 'text', 'created_at', 'user'),
             'isGuest' => !auth()->id(),
             'canLogin' => true,

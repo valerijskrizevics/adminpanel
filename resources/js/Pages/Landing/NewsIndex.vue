@@ -19,7 +19,7 @@ defineProps({
     
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">  
           <div v-for="post in posts.data" :key="post.id" class="bg-white rounded-lg shadow-lg p-4">        
-            <Link :href="route('landing.blog.show', post.id)">
+            <Link :href="route('landing.news.show', post.id)">
               <img :src="'/photos/' + (post.id % 10) + '.jpg'" class="rounded-md w-full h-40 object-cover">
               <h2 class="mt-3 text-lg font-semibold">{{ post.title }}</h2>
 
