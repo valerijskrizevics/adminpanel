@@ -3,7 +3,7 @@
 1. Uzinstalējiet docker un docker-compose
 2. Uzinstalējiet composer globāli
 3. Noklonējiet šo repozitoriju:
-- ** git clone --recurse-submodules -j8 https://github.com/valerijskrizevics/adminpanel.git
+- **git clone --recurse-submodules -j8 https://github.com/valerijskrizevics/adminpanel.git**
 4. Pārējiet uz mapi, kur ir šis fails
 5. Terminālī izpildiet komandas:
 - **composer install**
